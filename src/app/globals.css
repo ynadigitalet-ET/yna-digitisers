@@ -1,0 +1,392 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-purple: var(--brand-purple);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --brand-blue: #2563eb;
+  --brand-blue-dark: #1d4ed8;
+  --brand-purple: #7c3aed;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --brand-blue: #60a5fa;
+  --brand-blue-dark: #3b82f6;
+  --brand-purple: #a78bfa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand-blue) 25%, transparent);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Premium site background (Light Mode / Dark Mode + admin customization) */
+/* ---------------------------------------------------------------------- */
+
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-background-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 300ms ease;
+}
+
+.site-background-light {
+  opacity: 1;
+  background-color: #f6f7fc;
+}
+
+.site-background-dark {
+  opacity: 0;
+  background-color: #020617;
+}
+
+.dark .site-background-light {
+  opacity: 0;
+}
+
+.dark .site-background-dark {
+  opacity: 1;
+}
+
+.site-background-light-default {
+  background: linear-gradient(180deg, #f9fafe 0%, #f3f4fc 45%, #eef0fb 100%);
+}
+
+.site-background-dark-default {
+  background: linear-gradient(180deg, #020617 0%, #060b1f 45%, #030712 100%);
+}
+
+.site-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.6;
+  will-change: transform;
+}
+
+.site-blob-a {
+  width: 32rem;
+  height: 32rem;
+  top: -10rem;
+  left: -8rem;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.35), transparent 70%);
+}
+
+.site-blob-b {
+  width: 30rem;
+  height: 30rem;
+  top: 8rem;
+  right: -10rem;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.28), transparent 70%);
+}
+
+.site-blob-c {
+  width: 26rem;
+  height: 26rem;
+  bottom: -8rem;
+  left: 22%;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.16), transparent 70%);
+}
+
+.site-blob-d {
+  width: 34rem;
+  height: 34rem;
+  top: -12rem;
+  left: -10rem;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 70%);
+}
+
+.site-blob-e {
+  width: 30rem;
+  height: 30rem;
+  top: 12rem;
+  right: -12rem;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.32), transparent 70%);
+}
+
+.site-blob-f {
+  width: 28rem;
+  height: 28rem;
+  bottom: -10rem;
+  left: 25%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 70%);
+}
+
+.site-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
+  mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
+}
+
+.site-grid-dark {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+}
+
+.site-background-animated .site-blob-a,
+.site-background-animated .site-blob-d {
+  animation: site-float-a 22s ease-in-out infinite;
+}
+
+.site-background-animated .site-blob-b,
+.site-background-animated .site-blob-e {
+  animation: site-float-b 26s ease-in-out infinite;
+}
+
+.site-background-animated .site-blob-c,
+.site-background-animated .site-blob-f {
+  animation: site-float-c 30s ease-in-out infinite;
+}
+
+@keyframes site-float-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(2rem, 1.5rem) scale(1.08);
+  }
+}
+
+@keyframes site-float-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-2.5rem, 2rem) scale(1.05);
+  }
+}
+
+@keyframes site-float-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(1.5rem, -2rem) scale(1.1);
+  }
+}
+
+.site-custom-gradient.site-background-animated {
+  background-size: 200% 200%;
+  animation: site-gradient-shift 18s ease infinite;
+}
+
+@keyframes site-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.site-custom-image.site-background-animated {
+  animation: site-image-pan 30s ease-in-out infinite alternate;
+}
+
+@keyframes site-image-pan {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-blob {
+    filter: blur(50px);
+  }
+  .site-blob-a,
+  .site-blob-d {
+    width: 20rem;
+    height: 20rem;
+  }
+  .site-blob-b,
+  .site-blob-e {
+    width: 18rem;
+    height: 18rem;
+  }
+  .site-blob-c,
+  .site-blob-f {
+    width: 16rem;
+    height: 16rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-background-layer,
+  .site-blob {
+    animation: none !important;
+  }
+}
+
+.container-custom {
+  width: min(100% - 2rem, 1120px);
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.heading-1 {
+  font-size: clamp(2.6rem, 8vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+}
+
+.heading-2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.heading-3 {
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 750;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--background) 90%, white 10%);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+
+.dark .card {
+  background: color-mix(in srgb, var(--background) 88%, white 6%);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.input-field {
+  width: 100%;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  padding: 0.85rem 1rem;
+  color: var(--foreground);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.input-field:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-blue) 16%, transparent);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.8rem;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-ghost:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--brand-blue);
+  color: white;
+  padding: 0.85rem 1.15rem;
+}
+
+.btn-primary:hover {
+  background: var(--brand-blue-dark);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--background) 82%, white 18%);
+  color: var(--foreground);
+  padding: 0.85rem 1.15rem;
+}
+
+.btn-ghost {
+  color: var(--brand-blue);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand-blue) 25%, var(--border));
+  background: color-mix(in srgb, var(--brand-blue) 9%, transparent);
+  color: var(--brand-blue);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.prose-copy p {
+  margin-top: 1rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.prose-copy h2 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
